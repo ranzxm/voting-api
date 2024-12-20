@@ -1,0 +1,452 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Vote Options API",
+        "description": "Vote Options API Endpoints",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/polls/{idPolls}/options": {
+            "post": {
+                "description": "Endpoint create vote options",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Authorization"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdPolls"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request Body for create Vote Options",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestBodyOption"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Response success create options",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "$ref": "#/components/schemas/PropertiesOption"
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success create vote option!"
+                                        },
+                                        "status_code" : {
+                                            "type": "number",
+                                            "example": 201
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Response bad request create options",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "option_text" : {
+                                                    "type": "array",
+                                                    "example": [
+                                                        "this field is required"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        },
+                                        "status_code" : {
+                                            "type": "number",
+                                            "example": 400
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            },
+            "get" : {
+                "description": "Endpoint get all options",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Authorization"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdPolls"
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Response success get vote options",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id" : {
+                                                        "type": "number",
+                                                        "example": 1
+                                                    },
+                                                    "option_text" : {
+                                                        "type": "string",
+                                                        "example": "Ambalabus"
+                                                    },
+                                                    "poll_id" : {
+                                                        "type": "number",
+                                                        "example": 1
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "Timestamp when the option was created",
+                                                        "example": "2023-11-01T12:34:56Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "Timestamp when the option was last updated",
+                                                        "example": "2023-11-06T16:45:00Z"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success get all vote options"
+                                        },
+                                        "status_code" : {
+                                            "type": "number",
+                                            "example": 200
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/polls/{idPolls}/options/{idOptions}" : {
+            "get": {
+                "description": "Endpoint Get vote option",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Authorization"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdPolls"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdOptions"
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Response success get vote option.",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "$ref": "#/components/schemas/PropertiesOption"
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success get vote option by id"
+                                        },
+                                        "status_code" : {
+                                            "type": "number",
+                                            "example": 200
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Endpoint Update vote option",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Authorization"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdPolls"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdOptions"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request body for update vote option.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestBodyOption"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success update vote option repsonse",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "$ref": "#/components/schemas/PropertiesOption"
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success Update Vote Option!"
+                                        },
+                                        "status_code" : {
+                                            "type": "number",
+                                            "example": 200
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Endpoint Delete vote option",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Authorization"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdPolls"
+                    },
+                    {
+                        "$ref": "#/components/parameters/IdOptions"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success delete vote option response",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success delete vote option!"
+                                        },
+                                        "status_code" : {
+                                            "type": "number",
+                                            "example": 200
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PropertiesOption" : {
+                "type": "object",
+                "properties": {
+                    "id" : {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "option_text" : {
+                        "type": "string",
+                        "example": "Ambalabus"
+                    },
+                    "poll_id" : {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when the option was created",
+                        "example": "2023-11-01T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when the option was last updated",
+                        "example": "2023-11-06T16:45:00Z"
+                    }
+                }
+            },
+            "ResponseSuccessOptions" : {
+                "type": "object",
+                "properties": {
+                    "data" : {
+                        "type": "array",
+                        "items": [
+                            {
+                                "$ref": "#/components/schemas/PropertiesOption"
+                            }
+                        ]
+                    },
+                    "message" : {
+                        "type": "string",
+                        "example": "Success create option!"
+                    },
+                    "status_code" : {
+                        "type": "number",
+                        "example": 201
+                    }
+                }
+            },
+            "RequestBodyOption" : {
+                "type": "object",
+                "properties": {
+                    "option_text" : {
+                        "type": "string",
+                        "example": "Ambalabu"
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "Authorization" : {
+                "in": "header",
+                "name": "Authorization",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "Bearer abc123xyz"
+                },
+                "description": "Bearer token for authorization"
+            },
+            "IdPolls" : {
+                "in": "path",
+                "name": "idPolls",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "description": "ID Polls"
+            },
+            "IdOptions" : {
+                "in": "path",
+                "name": "idOptions",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "description": "ID Option"
+            }
+        },
+        "responses": {
+            "401" : {
+                "description": "Unauthorize User",
+                "content": {
+                    "application/json" : {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error" : {
+                                    "type": "string",
+                                    "example": "error, Unauthorize!"
+                                },
+                                "status_code" : {
+                                    "type": "number",
+                                    "example": 401
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Content Not Found",
+                "content": {
+                    "application/json" : {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error" : {
+                                    "type": "string",
+                                    "example": "ID are invalid"
+                                },
+                                "status_code" : {
+                                    "type": "number",
+                                    "example": 404
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

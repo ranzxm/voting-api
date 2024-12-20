@@ -1,0 +1,456 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Polls API",
+        "description": "Polls API Endpoints",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Contact Name",
+            "email": "contact@example.com",
+            "url": "http://localhost:8000/"
+        }
+    },
+    "tags": [
+        {
+            "name": "Metadata",
+            "description": "Metadata related requests"
+        }
+    ],
+    "paths": {
+        "/api/polls" : {
+            "post": {
+                "description": "create new polls",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer abc123xyz"
+                        },
+                        "description": "JWT token required to authenticate the request"
+                    }
+                ],
+                "requestBody": {
+                    "description": "request body create polls",
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title" : {
+                                        "type": "string",
+                                        "example": "Pemilihan ketua guild"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Pemilihan ketua guild untuk periode 2019-2020"
+                                    },
+                                    "start_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2023-11-01T12:34:56Z"
+                                    },
+                                    "end_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2023-11-01T12:34:56Z"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "start_at",
+                                    "end_at"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Response create polls",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "id" : {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "title" : {
+                                                    "type": "string",
+                                                    "example": "Pemilihan ketua guild"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Pemilihan ketua guild untuk periode 2019-2020"
+                                                },
+                                                "start_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "end_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Timestamp when the user was created",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Timestamp when the user was last updated",
+                                                    "example": "2023-11-05T15:30:00Z"
+                                                }
+                                            }
+                                        },
+                                        "status" : {
+                                            "type": "number",
+                                            "example": 201
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success create polls"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "get all polls",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer abc123xyz"
+                        },
+                        "description": "JWT token required to authenticate the request"
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Success get all polls",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id" : {
+                                                        "type": "number",
+                                                        "example": 1
+                                                    },
+                                                    "title" : {
+                                                        "type": "string",
+                                                        "example": "Pemilihan ketua guild"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Pemilihan ketua guild untuk periode 2019-2020"
+                                                    },
+                                                    "start_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2023-11-01T12:34:56Z"
+                                                    },
+                                                    "end_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2023-11-01T12:34:56Z"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "Timestamp when the user was created",
+                                                        "example": "2023-11-01T12:34:56Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "Timestamp when the user was last updated",
+                                                        "example": "2023-11-05T15:30:00Z"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/polls/{id}" : {
+            "put": {
+                "description": "update polls",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer abc123xyz"
+                        },
+                        "description": "JWT token required to authenticate the request"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        },
+                        "description": "Required ID polls in path"
+                    }
+                ],
+                "requestBody": {
+                    "description": "update polls request body",
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title" : {
+                                        "type": "string",
+                                        "example": "Pemilihan ketua guild"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Pemilihan ketua guild untuk periode 2019-2020"
+                                    },
+                                    "start_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2023-11-01T12:34:56Z"
+                                    },
+                                    "end_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2023-11-01T12:34:56Z"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Response update polls",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "id" : {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "title" : {
+                                                    "type": "string",
+                                                    "example": "Pemilihan ketua guild"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Pemilihan ketua guild untuk periode 2019-2020"
+                                                },
+                                                "start_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "end_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Timestamp when the user was created",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Timestamp when the user was last updated",
+                                                    "example": "2023-11-05T15:30:00Z"
+                                                }
+                                            }
+                                        },
+                                        "status" : {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success update polls"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "get polls by id",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer abc123xyz"
+                        },
+                        "description": "JWT token required to authenticate the request"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        },
+                        "description": "Required ID polls in path"
+                    }
+                ],
+                "responses": {
+                    "201" : {
+                        "description": "Response Get polls by ID",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "id" : {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "title" : {
+                                                    "type": "string",
+                                                    "example": "Pemilihan ketua guild"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Pemilihan ketua guild untuk periode 2019-2020"
+                                                },
+                                                "start_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "end_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Timestamp when the user was created",
+                                                    "example": "2023-11-01T12:34:56Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "description": "Timestamp when the user was last updated",
+                                                    "example": "2023-11-05T15:30:00Z"
+                                                }
+                                            }
+                                        },
+                                        "status" : {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success get polls"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete polls",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer abc123xyz"
+                        },
+                        "description": "JWT token required to authenticate the request"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        },
+                        "description": "Required ID polls in path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success delete polls response",
+                        "content": {
+                            "application/json" : {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status" : {
+                                            "type": "number",
+                                            "example": 200
+                                        },
+                                        "message" : {
+                                            "type": "string",
+                                            "example": "Success delete polls"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
